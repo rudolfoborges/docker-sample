@@ -30,6 +30,10 @@ subprojects {
 
 project(':docker-sample-api'){
 
+	jar{
+		archiveName = 'docker-sample-api.jar'
+	}
+
 	dependencies {
 		compile project(':docker-sample-core')
 
