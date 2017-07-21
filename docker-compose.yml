@@ -10,6 +10,15 @@ services:
       update_config:
         parallelism: 2
 
+  web:
+      image: rudolfoborges/docker-sample-web
+      ports:
+        - 8082:8082
+      deploy:
+        replicas: 2
+        update_config:
+          parallelism: 2
+
   visualizer:
       image: dockersamples/visualizer:stable
       ports:

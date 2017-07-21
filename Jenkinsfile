@@ -30,20 +30,32 @@ node {
 
         def version = getVersion()
 
-        def apiImage
-        stage(name: "Docker Build Imagem"){
+        stage(name: "Docker Build Imagem API"){
             sh "docker build docker-sample-api -t docker-sample-api:${version}"
-            apiImage = docker.build('docker-sample-api', 'docker-sample-api')
         }
 
 
-        stage(name: "Docker Push Image"){
+        stage(name: "Docker Push Image API"){
             docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
-                sh "docker tag docker-sample-api registry.hub.docker.com/rudolfoborges/docker-sample-api:0.0.1"
-                sh "docker push registry.hub.docker.com/rudolfoborges/docker-sample-api:0.0.1"
+                sh "docker tag docker-sample-api registry.hub.docker.com/rudolfoborges/docker-sample-api:${version}"
+                sh "docker push registry.hub.docker.com/rudolfoborges/docker-sample-api:${version}"
 
                 sh "docker tag docker-sample-api registry.hub.docker.com/rudolfoborges/docker-sample-api"
                 sh "docker push registry.hub.docker.com/rudolfoborges/docker-sample-api"
+            }
+        }
+
+        stage(name: "Docker Build Imagem WEB"){
+            sh "docker build docker-sample-api -t docker-sample-web:${version}"
+        }
+
+        stage(name: "Docker Push Image WEB"){
+            docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
+                sh "docker tag docker-sample-api registry.hub.docker.com/rudolfoborges/docker-sample-web:${version}"
+                sh "docker push registry.hub.docker.com/rudolfoborges/docker-sample-web:${version}"
+
+                sh "docker tag docker-sample-api registry.hub.docker.com/rudolfoborges/docker-sample-web"
+                sh "docker push registry.hub.docker.com/rudolfoborges/docker-sample-web"
             }
         }
 
@@ -51,8 +63,6 @@ node {
         stage(name: "Docker Deploy"){
             sh "docker stack deploy --compose-file docker-compose.yml docker-sample"
         }
-
-
     }
 
 }

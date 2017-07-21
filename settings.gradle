@@ -1,5 +1,6 @@
 rootProject.name = 'docker-sample'
 
 include 'docker-sample-api',
+        'docker-sample-web',
         'docker-sample-core',
         'docker-sample-persistence'

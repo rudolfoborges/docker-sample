@@ -1,6 +1,6 @@
 buildscript {
 	ext {
-		springBootVersion = '1.5.4.RELEASE'
+		springBootVersion = '1.5.3.RELEASE'
 	}
 	repositories {
 		mavenCentral()
@@ -24,6 +24,22 @@ subprojects {
 
 	repositories {
 		mavenCentral()
+	}
+
+}
+
+project(':docker-sample-web'){
+
+	jar{
+		archiveName = 'docker-sample-web.jar'
+	}
+
+	dependencies {
+		compile('org.springframework.boot:spring-boot-starter-actuator')
+		compile('org.springframework.boot:spring-boot-actuator-docs')
+		compile('org.springframework.boot:spring-boot-starter-web')
+		compile('org.springframework.boot:spring-boot-starter-thymeleaf')
+		testCompile('org.springframework.boot:spring-boot-starter-test')
 	}
 
 }
