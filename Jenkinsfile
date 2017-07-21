@@ -8,31 +8,45 @@ node {
 
         def gradle = "./gradlew"
 
-        stage(name: "Git Checkout", concurrency: 1)
-        checkout scm
+        stage(name: "Git Checkout", concurrency: 1){
+            checkout scm
+        }
 
 
-        stage(name: "Clean", concurrency: 1)
-        sh "${gradle} clean"
+        stage(name: "Clean", concurrency: 1){
+            sh "${gradle} clean"
+        }
 
 
-        stage(name: "Build", concurrency: 1)
-        sh "${gradle} build"
+        stage(name: "Build", concurrency: 1){
+            sh "${gradle} build"
+        }
 
 
-        stage(name: "Tests", concurrency: 1)
-        sh "${gradle} test"
+        stage(name: "Tests", concurrency: 1){
+            sh "${gradle} test"
+        }
 
 
         def version = getVersion()
 
+        def apiImage
+        stage(name: "Docker Build Imagem", concurrency: 1){
+            apiImage = docker.build('docker-sample-api')
+        }
 
-        stage(name: "Docker Build Imagem", concurrency: 1)
-        sh "docker build -t docker-sample-api docker-sample-api"
+
+        stage(name: "Docker Push Image", concurrency: 1){
+            docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
+                apiImage.push("${version}")
+                apiImage.push("latest")
+            }
+        }
 
 
-        stage(name: "Docker Deploy", concurrency: 1)
-        sh "docker stack deploy --compose-file docker-compose.yml docker-sample"
+        stage(name: "Docker Deploy", concurrency: 1){
+            sh "docker stack deploy --compose-file docker-compose.yml docker-sample"
+        }
 
 
     }
