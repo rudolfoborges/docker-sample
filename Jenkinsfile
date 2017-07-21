@@ -32,7 +32,7 @@ node {
 
         def apiImage
         stage(name: "Docker Build Imagem"){
-            apiImage = docker.build('docker-sample-api')
+            apiImage = docker.build('docker-sample-api', 'docker-sample-api')
         }
 
 
