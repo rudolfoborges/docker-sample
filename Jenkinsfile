@@ -41,6 +41,9 @@ node {
             docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
                 sh "docker tag docker-sample-api registry.hub.docker.com/rudolfoborges/docker-sample-api:0.0.1"
                 sh "docker push registry.hub.docker.com/rudolfoborges/docker-sample-api:0.0.1"
+
+                sh "docker tag docker-sample-api registry.hub.docker.com/rudolfoborges/docker-sample-api"
+                sh "docker push registry.hub.docker.com/rudolfoborges/docker-sample-api"
             }
         }
 
