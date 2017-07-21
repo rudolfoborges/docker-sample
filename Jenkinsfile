@@ -28,7 +28,7 @@ node {
 
 
         stage(name: "Docker API Imagem", concurrency: 1)
-        sh "docker build -t docker-sample-api docker-sample-api:${version}"
+        sh "docker build -t docker-sample-api:${version} docker-sample-api"
     }
 
 }
