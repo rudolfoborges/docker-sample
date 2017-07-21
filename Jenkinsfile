@@ -1,34 +1,38 @@
 #!groovy
 
+node("docker") {
 
-withEnv(["JAVA_HOME=/opt/jdk8"]) {
+    withEnv(["JAVA_HOME=/opt/jdk8"]) {
 
-    deleteDir()
+        deleteDir()
 
-    def gradle = "./gradlew"
+        def gradle = "./gradlew"
 
-    stage(name: "Git Checkout", concurrency: 1)
-    checkout scm
-
-
-    stage(name: "Clean", concurrency: 1)
-    sh "${gradle} clean"
+        stage(name: "Git Checkout", concurrency: 1)
+        checkout scm
 
 
-    stage(name: "Build", concurrency: 1)
-    sh "${gradle} build"
+        stage(name: "Clean", concurrency: 1)
+        sh "${gradle} clean"
 
 
-    stage(name: "Tests", concurrency: 1)
-    sh "${gradle} test"
+        stage(name: "Build", concurrency: 1)
+        sh "${gradle} build"
 
 
-    def version = getVersion()
+        stage(name: "Tests", concurrency: 1)
+        sh "${gradle} test"
 
 
-    stage(name: "Docker API Imagem", concurrency: 1)
-    sh docker build -t docker-sample-api docker-sample-api:"${version}"
+        def version = getVersion()
+
+
+        stage(name: "Docker API Imagem", concurrency: 1)
+        sh "docker build -t docker-sample-api docker-sample-api:${version}"
+    }
+
 }
+
 
 
 def getVersion() {
