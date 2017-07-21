@@ -46,15 +46,15 @@ node {
         }
 
         stage(name: "Docker Build Imagem WEB"){
-            sh "docker build docker-sample-api -t docker-sample-web:${version}"
+            sh "docker build docker-sample-web -t docker-sample-web:${version}"
         }
 
         stage(name: "Docker Push Image WEB"){
             docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
-                sh "docker tag docker-sample-api registry.hub.docker.com/rudolfoborges/docker-sample-web:${version}"
+                sh "docker tag docker-sample-web registry.hub.docker.com/rudolfoborges/docker-sample-web:${version}"
                 sh "docker push registry.hub.docker.com/rudolfoborges/docker-sample-web:${version}"
 
-                sh "docker tag docker-sample-api registry.hub.docker.com/rudolfoborges/docker-sample-web"
+                sh "docker tag docker-sample-web registry.hub.docker.com/rudolfoborges/docker-sample-web"
                 sh "docker push registry.hub.docker.com/rudolfoborges/docker-sample-web"
             }
         }
