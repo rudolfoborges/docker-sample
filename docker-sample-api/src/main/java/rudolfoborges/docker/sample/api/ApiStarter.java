@@ -29,5 +29,10 @@ public class ApiStarter implements CommandLineRunner {
 				.withName("Docker")
 				.withDescription("Configurar o projeto para rodar no docker")
 				.build());
+
+		todoService.create(new TodoBuilder()
+				.withName("Docker 1")
+				.withDescription("Configurar o projeto para rodar no docker")
+				.build());
 	}
 }
