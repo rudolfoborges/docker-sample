@@ -1,0 +1,77 @@
+buildscript {
+	ext {
+		springBootVersion = '1.5.4.RELEASE'
+	}
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+subprojects {
+
+	apply plugin: 'java'
+	apply plugin: 'eclipse'
+	apply plugin: 'org.springframework.boot'
+
+	sourceCompatibility = 1.8
+	targetCompatibility = 1.8
+
+	compileJava.options.encoding = 'UTF-8'
+	compileTestJava.options.encoding = 'UTF-8'
+
+	repositories {
+		mavenCentral()
+	}
+
+}
+
+project(':docker-sample-api'){
+
+	dependencies {
+		compile project(':docker-sample-core')
+
+		compile('org.springframework.boot:spring-boot-starter-actuator')
+		compile('org.springframework.boot:spring-boot-actuator-docs')
+		compile('org.springframework.boot:spring-boot-starter-validation')
+		compile('org.springframework.boot:spring-boot-starter-web')
+		compileOnly('org.projectlombok:lombok')
+		testCompile('org.springframework.boot:spring-boot-starter-test')
+	}
+
+}
+
+project(':docker-sample-core'){
+
+	bootRepackage {
+		enabled = false
+	}
+
+	dependencies {
+		compile project(':docker-sample-persistence')
+
+		compile('org.springframework.boot:spring-boot-starter-validation')
+		compileOnly('org.projectlombok:lombok')
+		testCompile('org.springframework.boot:spring-boot-starter-test')
+	}
+
+}
+
+
+project(':docker-sample-persistence'){
+
+	bootRepackage {
+		enabled = false
+	}
+
+	dependencies {
+		compile('org.springframework.boot:spring-boot-starter-data-jpa')
+		compile('org.springframework.boot:spring-boot-starter-validation')
+		runtime('com.h2database:h2')
+		compileOnly('org.projectlombok:lombok')
+		testCompile('org.springframework.boot:spring-boot-starter-test')
+	}
+
+}
