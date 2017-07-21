@@ -32,12 +32,13 @@ node {
 
         def apiImage
         stage(name: "Docker Build Imagem"){
+            sh "docker build docker-sample-api -t docker-sample-api:${version}"
             apiImage = docker.build('docker-sample-api', 'docker-sample-api')
         }
 
 
         stage(name: "Docker Push Image"){
-            docker.withRegistry('https://registry.hub.docker.com/rudolfoborges/docker-sample-api', 'docker-hub-credentials') {
+            docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
                 apiImage.push("${version}")
                 apiImage.push("latest")
             }
