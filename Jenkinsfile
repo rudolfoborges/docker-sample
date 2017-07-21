@@ -28,8 +28,8 @@ node {
 
 
         stage(name: "Docker Build Imagem", concurrency: 1)
-        sh "docker build -t docker-sample-api:${version} docker-sample-api"
-        
+        sh "docker build -t docker-sample-api docker-sample-api"
+
 
         stage(name: "Docker Deploy", concurrency: 1)
         sh "docker stack deploy --compose-file docker-compose.yml docker-sample"
