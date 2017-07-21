@@ -2,10 +2,10 @@ version: "3"
 
 services:
   api:
-    image: docker-sample-api
+    image: rudolfoborges/docker-sample-api
     ports:
       - 8081:8081
     deploy:
-      replicas: 4
+      replicas: 3
       update_config:
         parallelism: 2
