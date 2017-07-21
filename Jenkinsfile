@@ -39,8 +39,8 @@ node {
 
         stage(name: "Docker Push Image"){
             docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
-                apiImage.push("${version}")
-                apiImage.push("latest")
+                docker tag docker-sample-api registry.hub.docker.com/rudolfoborges/docker-sample-api:0.0.1
+                docker push registry.hub.docker.com/rudolfoborges/docker-sample-api:0.0.1
             }
         }
 
