@@ -32,6 +32,7 @@ node {
 
         stage(name: "Docker Build Imagem API"){
             sh "docker build docker-sample-api -t docker-sample-api:${version}"
+            sh "docker build docker-sample-api -t docker-sample-api"
         }
 
 
@@ -47,6 +48,7 @@ node {
 
         stage(name: "Docker Build Imagem WEB"){
             sh "docker build docker-sample-web -t docker-sample-web:${version}"
+            sh "docker build docker-sample-web -t docker-sample-web"
         }
 
         stage(name: "Docker Push Image WEB"){
