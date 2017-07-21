@@ -27,8 +27,14 @@ node {
         def version = getVersion()
 
 
-        stage(name: "Docker API Imagem", concurrency: 1)
+        stage(name: "Docker Build Imagem", concurrency: 1)
         sh "docker build -t docker-sample-api:${version} docker-sample-api"
+        
+
+        stage(name: "Docker Deploy", concurrency: 1)
+        sh "docker stack deploy --compose-file docker-compose.yml docker-sample"
+
+
     }
 
 }
