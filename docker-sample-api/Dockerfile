@@ -1,4 +1,4 @@
-FROM java:8
+FROM anapsix/alpine-java:8
 
 WORKDIR /opt
 
