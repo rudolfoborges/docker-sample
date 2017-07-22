@@ -8,7 +8,7 @@ services:
     deploy:
       replicas: 2
       update_config:
-        parallelism: 2
+        parallelism: 1
 
   web:
       image: rudolfoborges/docker-sample-web
@@ -17,7 +17,7 @@ services:
       deploy:
         replicas: 2
         update_config:
-          parallelism: 2
+          parallelism: 1
 
   visualizer:
       image: dockersamples/visualizer:stable
