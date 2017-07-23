@@ -4,7 +4,7 @@ services:
   api:
     image: rudolfoborges/docker-sample-api
     ports:
-      - "8081:8081"
+      - 8081:8081
     deploy:
       replicas: 2
       update_config:
@@ -14,17 +14,19 @@ services:
   web:
       image: rudolfoborges/docker-sample-web
       ports:
-        - "8082:8082"
+        - 8082:8082
       deploy:
         replicas: 2
         update_config:
           parallelism: 1
           delay: 10s
+      depends_on:
+        - api
 
   visualizer:
       image: dockersamples/visualizer:stable
       ports:
-        - "8083:8080"
+        - 8083:8080
       stop_grace_period: 1m30s
       volumes:
         - "/var/run/docker.sock:/var/run/docker.sock"
