@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
@@ -23,7 +22,7 @@ public class HomeController {
 
 		final InetAddress localHost = InetAddress.getLocalHost();
 
-		model.addAttribute("hostname", localHost.getHostName());
+		model.addAttribute("hostname", localHost.getCanonicalHostName());
 
 		return "index";
 	}
