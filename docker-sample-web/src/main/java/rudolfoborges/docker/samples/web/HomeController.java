@@ -22,7 +22,7 @@ public class HomeController {
 
 		final InetAddress localHost = InetAddress.getLocalHost();
 
-		model.addAttribute("hostname", localHost.getCanonicalHostName());
+		model.addAttribute("hostname", localHost.getHostAddress());
 
 		return "index";
 	}
