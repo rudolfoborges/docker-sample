@@ -9,6 +9,7 @@ services:
       replicas: 2
       update_config:
         parallelism: 1
+        delay: 60s
 
   web:
       image: rudolfoborges/docker-sample-web
