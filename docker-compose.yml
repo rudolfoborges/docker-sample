@@ -9,7 +9,7 @@ services:
       replicas: 2
       update_config:
         parallelism: 1
-        delay: 60s
+        delay: 10s
 
   web:
       image: rudolfoborges/docker-sample-web
@@ -19,7 +19,7 @@ services:
         replicas: 2
         update_config:
           parallelism: 1
-          delay: 60s
+          delay: 10s
 
   visualizer:
       image: dockersamples/visualizer:stable
