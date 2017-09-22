@@ -1,6 +1,6 @@
 #!groovy
 
-node {
+node("docker-test") {
 
     withEnv(["JAVA_HOME=/opt/jdk8"]) {
 
