@@ -4,7 +4,7 @@ node("docker-test") {
     
     sh 'java -version'
     
-    //withEnv(["JAVA_HOME=/opt/jdk8"]) {
+    withEnv(["JAVA_HOME=/opt/jdk1.8.0_144"]) {
 
         deleteDir()
 
@@ -67,7 +67,7 @@ node("docker-test") {
         stage(name: "Docker Deploy"){
             sh "docker stack deploy --compose-file docker-compose.yml docker-sample"
         }
-    //}
+    }
 
 }
 
