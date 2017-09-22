@@ -1,6 +1,6 @@
 #!groovy
 
-node("docker-test") {
+node("docker-qa") {
     
     sh 'docker -v'
     //sh '/opt/jdk8/bin/java -version'
