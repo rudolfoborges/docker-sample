@@ -2,10 +2,10 @@
 
 node("docker-test") {
     
-    sh 'ls -la /opt/jdk8/bin'
-    sh '/opt/jdk8/bin/java -version'
+    //sh 'ls -la /opt/jdk8/bin'
+    //sh '/opt/jdk8/bin/java -version'
     
-    withEnv(["JAVA_HOME=/opt/jdk8"]) {
+    //withEnv(["JAVA_HOME=/opt/jdk8"]) {
 
         deleteDir()
 
@@ -68,7 +68,7 @@ node("docker-test") {
         stage(name: "Docker Deploy"){
             sh "docker stack deploy --compose-file docker-compose.yml docker-sample"
         }
-    }
+    //}
 
 }
 
