@@ -39,7 +39,7 @@ node("docker-test") {
         }
 
 
-        stage(name: "Docker Push Image API"){
+        /*stage(name: "Docker Push Image API"){
             docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
                 sh "docker tag docker-sample-api registry.hub.docker.com/rudolfoborges/docker-sample-api:${version}"
                 sh "docker push registry.hub.docker.com/rudolfoborges/docker-sample-api:${version}"
@@ -47,14 +47,14 @@ node("docker-test") {
                 sh "docker tag docker-sample-api registry.hub.docker.com/rudolfoborges/docker-sample-api"
                 sh "docker push registry.hub.docker.com/rudolfoborges/docker-sample-api"
             }
-        }
+        }*/
 
         stage(name: "Docker Build Imagem WEB"){
             sh "docker build docker-sample-web -t docker-sample-web:${version}"
             sh "docker build docker-sample-web -t docker-sample-web"
         }
 
-        stage(name: "Docker Push Image WEB"){
+        /*stage(name: "Docker Push Image WEB"){
             docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
                 sh "docker tag docker-sample-web registry.hub.docker.com/rudolfoborges/docker-sample-web:${version}"
                 sh "docker push registry.hub.docker.com/rudolfoborges/docker-sample-web:${version}"
@@ -62,7 +62,7 @@ node("docker-test") {
                 sh "docker tag docker-sample-web registry.hub.docker.com/rudolfoborges/docker-sample-web"
                 sh "docker push registry.hub.docker.com/rudolfoborges/docker-sample-web"
             }
-        }
+        }*/
 
 
         stage(name: "Docker Deploy"){
