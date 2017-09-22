@@ -2,7 +2,7 @@
 
 node("docker-test") {
     
-    //sh 'ls -la /opt/jdk8/bin'
+    sh 'docker -v'
     //sh '/opt/jdk8/bin/java -version'
     
     //withEnv(["JAVA_HOME=/opt/jdk8"]) {
