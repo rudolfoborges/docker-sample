@@ -2,9 +2,10 @@
 
 node("docker-test") {
     
-    sh 'java -version'
+    sh 'ls /opt/jdk8/bin'
+    sh '/opt/jdk8/bin/java -version'
     
-    withEnv(["JAVA_HOME=/opt/jdk8/jre"]) {
+    withEnv(["JAVA_HOME=/opt/jdk8"]) {
 
         deleteDir()
 
